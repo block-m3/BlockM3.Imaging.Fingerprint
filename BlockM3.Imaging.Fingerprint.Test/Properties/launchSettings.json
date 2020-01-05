@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "BlockM3.Imaging.Fingerprint.Test": {
+      "commandName": "Project",
+      "commandLineArgs": "\"D:\\downloads\\8a287a59c54bf4f9662c84e310ca621a.jpg\" \"This is a fingerprint inside the image\""
+    }
+  }
+}
