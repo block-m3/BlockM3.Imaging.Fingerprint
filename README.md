@@ -3,7 +3,8 @@ Image Fingerprint/Watermarking Library
 
 Using wavelets, discreet cosine transformation and reed solomon.
 
-This library first use haar wavelet transformation. and then use the middle frequency coefficients in DCT to store the fingerprint with reed solomon.
+This library first use haar wavelet transformation, convert to YCbCr, then use the Cb channel and apply 4x4 Discreet Cosine Transformation, and then use the middle frequency coefficients in DCT to store the fingerprint with reed solomon.
+
 You can chose which wavelet sub band to store the fingerprint.
 
 DCT and HAAR are optimized for mobile use.
@@ -19,7 +20,7 @@ and
 **Fingerprint.Extract**
 
 
-this library uses SkiaSharp for image I/O.
+this library uses [SkiaSharp](https://github.com/mono/SkiaSharp) nuget for image I/O.
 
 Part of this libraries uses:
 
