@@ -24,6 +24,13 @@
 namespace BlockM3.Imaging.Fingerprint.Math
 {
     //Single Floating point Discreet Cosine Transformation optimized 
+    //
+    //  Optimizations
+    //* Precomputed Cosine Table
+    //* Less temporary buffer copies overhead.
+    //* Inlining
+    //* Changed divisions to multiplications when possible
+
     public class SDCT
     {
         private float scale;

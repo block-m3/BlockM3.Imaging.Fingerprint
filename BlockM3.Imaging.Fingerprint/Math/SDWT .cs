@@ -26,10 +26,12 @@ using System.Threading.Tasks;
 
 namespace BlockM3.Imaging.Fingerprint.Math
 {
-    //Single Floating Point Haar wavelet Transform original from Accord 
-    //  Optimizations :
-    //* Inlining and less temporaries buffer copies.
-    //* Changed Divisions for Multiplications.
+    //Single Floating Point Haar wavelet Transform original from Accord optimized
+    //
+    //  Optimizations
+    //* Less temporary buffer copies overhead.
+    //* Inlining
+    //* Changed divisions to multiplications when possible
 
     public static class SDWT
     {

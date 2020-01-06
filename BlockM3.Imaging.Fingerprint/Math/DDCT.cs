@@ -25,6 +25,12 @@ namespace BlockM3.Imaging.Fingerprint.Math
 {
     //Double floating Point Discreet Cosine Transformation from Accord optimized 
     //
+    //  Optimizations
+    //* Precomputed Cosine Table
+    //* Less temporary buffer copies overhead.
+    //* Inlining
+    //* Changed divisions to multiplications when possible
+
     public class DDCT
     {
        

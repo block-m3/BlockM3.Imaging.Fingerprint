@@ -25,10 +25,12 @@ using System.Threading.Tasks;
 
 namespace BlockM3.Imaging.Fingerprint.Math
 {
-    //Haar wavelet Transform original from Accord 
-    //  Optimizations 
-    //* Inlining and less temporaries buffer copies.
-    //* Changed Divisions for Multiplications.
+    //Haar wavelet Transform original from Accord optimized
+    //
+    //  Optimizations
+    //* Less temporary buffer copies overhead.
+    //* Inlining
+    //* Changed divisions to multiplications when possible
     public static class DDWT
     {
         private const double w0 = 0.5;

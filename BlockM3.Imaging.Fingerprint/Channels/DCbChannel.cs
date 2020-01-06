@@ -66,15 +66,14 @@ namespace BlockM3.Imaging.Fingerprint.Channels
 
         public static double[,] ExtractCbChannel(byte[] bgra, int width, int clipX, int clipY, int clipWidth, int clipHeight)
         {
+            int w8 = clipWidth >> 3;
+            int r8 = clipWidth % 8;
             double[,] u=new double[clipWidth, clipHeight];
             Parallel.For(0, clipHeight, (y) =>
             {
-                int startY = ((y + clipY) * width + clipX) << 2;
                 //unroll
-                int w8 = clipWidth >> 3;
-                int r8 = clipWidth % 8;
                 int dx = 0;
-                int sx = startY;
+                int sx = ((y + clipY) * width + clipX) << 2;
                 for (int x = 0; x < w8; x++)
                 {
                     u[dx++, y] = 128+cb_r_table[bgra[sx + 2]]+cb_g_table[bgra[sx + 1]]+cb_b_table[bgra[sx]];
@@ -106,16 +105,13 @@ namespace BlockM3.Imaging.Fingerprint.Channels
        
         public static void InsertCbChannel(byte[] bgra, double[,] u, int width, int clipX, int clipY, int clipWidth, int clipHeight)
         {
+            int w8 = clipWidth >> 3;
+            int r8 = clipWidth % 8;
             Parallel.For(0, clipHeight, (y) =>
             {
-                int startY = ((y + clipY) * width + clipX) << 2;
-
-
                 //unroll
-                int w8 = clipWidth >> 3;
-                int r8 = clipWidth % 8;
                 int dx = 0;
-                int sx = startY;
+                int sx = ((y + clipY) * width + clipX) << 2;
                 double oy;
                 double ocb;
                 double ocr;
@@ -180,7 +176,6 @@ namespace BlockM3.Imaging.Fingerprint.Channels
                     bgra[sx++] = Clamp(oy + b_cb * ocb);
                     bgra[sx] = Clamp(oy + g_cb * ocb + g_cr * ocr);
                     sx += 3;
-
                 }
             });
         }

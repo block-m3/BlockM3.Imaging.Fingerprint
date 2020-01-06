@@ -37,7 +37,7 @@ namespace BlockM3.Imaging.Fingerprint.Methods
 
         public static (int, int, int, int) GetBestClip(int length, int width, int height)
         {
-            (int clipWidth, int clipHeight, int level) = CalcLevel(length, width / 16 * 15, height / 16 * 15);
+            (int clipWidth, int clipHeight, int level) = CalcLevel(length, width / 32 * 31, height / 32 * 31);
             if (level==0)
                 throw new ArgumentException("Unable to embed, data is too long");
             clipWidth <<= level;
