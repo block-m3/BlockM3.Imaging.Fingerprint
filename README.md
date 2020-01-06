@@ -19,4 +19,11 @@ and
 **Fingerprint.Extract**
 
 
+this library uses SkiaSharp for image I/O.
+
+Part of this libraries uses:
+
+[Accord.Net DCT & Haar Wavelets algorithms](https://github.com/accord-net/framework) modified and optimized for this library.
+
+[Reed Solomon Algorithms from ZXING](https://github.com/micjahn/ZXing.Net).
 
