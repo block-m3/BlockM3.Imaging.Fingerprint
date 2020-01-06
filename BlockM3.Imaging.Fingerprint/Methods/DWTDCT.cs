@@ -153,19 +153,24 @@ namespace BlockM3.Imaging.Fingerprint.Methods
             int width = channel.GetUpperBound(0) + 1;
             int height = channel.GetUpperBound(1) + 1;
             (int maxW, int maxH, int level) = CalcLevel(totalLength, width, height);
-            (int posX, int posY)=GetSubBandStart(width, height, level, band);
+            (int posX, int posY) = GetSubBandStart(width, height, level, band);
             SDWT.Forward(channel, level);
-            List<bool> b=new List<bool>();
-            SDCT dct=new SDCT(4);
+            SDCT dct = new SDCT(4);
+            int orgW = maxW>>2;
             maxW += posX;
-            maxH >>=2;
+            maxH >>= 2;
+            bool[] res = new bool[maxH * orgW];
             Parallel.For(0, maxH, (z) =>
             {
+                int opos = z * orgW;
                 int y = z << 2 + posY;
                 for (int x = posX; x < maxW; x += 4)
-                    b.Add(GetFeature(dct.Extract(channel, x, y)));
+                {
+                    int pos = opos + ((x - posX) >> 2);
+                    res[pos] = GetFeature(dct.Extract(channel, x, y));
+                }
             });
-            BitArray bi=new BitArray(b.ToArray());
+            BitArray bi=new BitArray(res);
             byte[] array = bi.ToByteArray();
             Array.Resize(ref array, totalLength);
             return array;
